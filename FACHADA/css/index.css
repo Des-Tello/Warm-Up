@@ -1,0 +1,79 @@
+:root {
+    --fuentePrincipal: 'Staatliches', cursive;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /* 1rem = 10px */
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* GLOABALES */
+
+body {
+    background-color: #edeff2;
+    display: flex;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+p {font-family: Arial, Helvetica, sans-serif;}
+a {text-decoration: none;}
+img {width: 100%;}
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
+}
+h1 {font-size: 4rem;}
+h2 {font-size: 3rem;}
+h3 {font-size: 2.4rem;}
+h4 {font-size: 2rem;}
+
+/* HEADER */
+
+.header {
+    background-color: #2d3763;
+    color: white;
+}
+
+/* MAIN */
+
+.main {
+    background-color: white;
+    padding: 2rem;
+}
+.main_p {
+    text-align: justify;
+}
+.main_line {
+    background-color: #bbb;
+}
+
+/* FOOTER */
+
+.footer {
+    background-color: #2d3763;
+    padding: 2rem;
+    color: white;
+}
+.footer_line1 {
+    text-align: left;
+    margin-left: 0;
+    background-color: white;
+}
+.footer_list {
+    list-style: none;
+    font-size: 2rem;
+}
+.insercion{
+    font-family:'Courier New', Courier, monospace;
+    justify-content: center;
+}
+.titulo_tabla{
+
+}
+.contenido_tabla{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 50;
+    font-stretch: condensed;
+}
