@@ -74,58 +74,61 @@
                 </p>
             </div>
 
-            <div class="col-12 mt-4 ingrese">
-                    <div class="fondo_datos">
-                <h2 class="titulo_datos">Simula tu Crédito</h2>
-                <hr class="main_line">
-                <form id="formulario" name="" >
-                        <div class="insercion">
-                    <label for="valorcredito"> Valor del Credito: </label> <br>
-                    <input  type="number"  id="valorcredito">
-                    <br><br> 
+            <div class="col-12 my-4 ingrese">
+                <div class="fondo_datos" id="simulador">
+                    <h2 class="titulo_datos">Simula tu Crédito</h2>
+                    <hr class="main_line">
+                    <form id="formulario" name="" >
+                            <div class="insercion">
+                        <label for="valorcredito"> Valor del Credito: </label> <br>
+                        <input  type="number"  id="valorcredito">
+                        <br><br> 
 
-                    <label for="plazo">Plazo del Credito:</label> <br>
-                    <input type="number"  id="plazo"> 
-                    <br><br>
-
-                    <label for="porcentajeInteres">Interes:</label> <br>
-                    <input type="number"  id="porcentajeInteres">
-                    <br><br>
-
-                    <label for="valorcuota">Valor de la cuota:</label> <br>
-                    <input type="number" id="valorcuota">
-                    <br><br>
-                        
-
-                    ¿Tiene Seguros asociados?
-
-                    <input id="check" onchange="javascript:showContent()" type="checkbox" name="seguros" value=""> <br>
-                    <div id="content" style="display: none;">
-                        <label for="seguros">Seguros asociados</label>
-                        <input type="number"  id="seguros">
-                    </div>
-                    <br>
-
-                    ¿Cuenta con gastos asociados?
-                    <input id="check2" onchange="javascript:showContent()" type="checkbox" name="gastos" value=""><br>
-                    <br>
-                    <div id="content2" style="display: none;">
-                        <label for="seguros">Gasatos asociados</label>
-                        <input type="number"  id="gastos">
-                    </div>
-                        </div> <!--Fin del cambio de font en la insercion de datos.-->
-                    <button class="buttom_style"type="button" onclick="calculos()">Calcular</button>
-                        </div> <!--fondo de la solicitud de datos -->
+                        <label for="plazo">Plazo del Credito:</label> <br>
+                        <input type="number"  id="plazo"> 
                         <br><br>
-                        <table style="width:100%" id="table">
 
-                        </table>
-                
-                
-                </form>
-                
+                        <label for="porcentajeInteres">Interes:</label> <br>
+                        <input type="number"  id="porcentajeInteres">
+                        <br><br>
 
+                        <label for="valorcuota">Valor de la cuota:</label> <br>
+                        <input type="number" id="valorcuota">
+                        <br><br>
+                            
+
+                        ¿Tiene Seguros asociados?
+
+                        <input id="check" onchange="javascript:showContent()" type="checkbox" name="seguros" value=""> <br>
+                        <div id="content" style="display: none;">
+                            <br>
+                            <label for="seguros">Seguros asociados</label>
+                            <input type="number"  id="seguros">
+                        </div>
+                        <br>
+
+                        ¿Cuenta con gastos asociados?
+                        <input id="check2" onchange="javascript:showContent()" type="checkbox" name="gastos" value=""><br>
+                        <br>
+                        <div id="content2" style="display: none;">
+                            <label for="seguros">Gasatos asociados</label>
+                            <input type="number"  id="gastos">
+                        </div>
+                        
+                        <button class="buttom_style mt-4"type="button" onclick="calculos()">Calcular</button>
+                    </form>
+                </div> <!--fondo de la solicitud de datos -->
             </div>
+            
+                
+                
+            </div>
+            
+            <table style="width:100%" id="table" class="table table-striped table-bordered table-hover table-responsive-lg ">
+                <tbody class="valores_cae ">
+
+                </tbody>
+            </table>
 
 
         </main>

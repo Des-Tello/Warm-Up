@@ -33,7 +33,7 @@ h4 {font-size: 2rem;}
 
 .header {
     background-color: #2d3763;
-    color: white;
+    color: #edeff2;
 }
 
 /* MAIN */
@@ -54,7 +54,7 @@ h4 {font-size: 2rem;}
 .footer {
     background-color: #2d3763;
     padding: 2rem;
-    color: white;
+    color: #edeff2;
 }
 .footer_line1 {
     text-align: left;
@@ -68,21 +68,6 @@ h4 {font-size: 2rem;}
 .insercion{
     font-family:'Courier New', Courier, monospace;
     justify-content: center;
-}
-.titulo_tabla{
-    background-color: #2d3763;
-    color: white;
-    font-weight: lighter ;
-
-}
-.contenido_tabla{
-    background-color: #cccccc;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 50;
-    font-stretch: condensed;
-}
-table,tr,th{
-    border: 0.1rem solid black;
 }
 input{
    border-radius: 0.5rem;
@@ -99,6 +84,12 @@ input{
     text-align: center;
     
 }
+.titulo_tabla{
+    background-color: #2d3763;
+    color: #edeff2;
+    font-weight: lighter ;
+
+}
 .ingrese{
     text-align: center;
 }
@@ -114,6 +105,6 @@ input{
     border: 0.2rem solid black;
 }
 .buttom_style:hover{
-    color: white;
+    color: #edeff2;
     background-color: #2d3763;
 }

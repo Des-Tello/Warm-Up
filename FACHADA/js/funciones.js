@@ -2,7 +2,8 @@
     var creditos = [];
     
    
-    var de ='<tr class="titulo_tabla">'+
+    var deHEAD ='<thead class="titulo_tabla">'+
+            '<tr>'+
             '<th>Valor Cuota</th>'+
             '<th>CAE</th>'+
             '<th>Interes[%]</th>'+
@@ -11,7 +12,8 @@
             '<th>Total de Interes</th>'+
             '<th>Monto Bruto</th>'+
             '<th>Costo Total</th>'+
-        '</tr>';
+            '</tr>'+
+            '</thead>';
             
     function calculos(){
         //datos minimos
@@ -129,7 +131,7 @@
             
 
             //for (var i = 0; i < creditos.length; i++) {
-                de+= '<tr class="contenido_tabla" id="contenido_tabla">'+
+                var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
                 '<th>'+credito.valorcuota+'</th>'+
                 '<th>'+credito.CAE+'</th>'+
                 '<th>'+credito.interes*100+'</th>'+
@@ -140,8 +142,10 @@
                 '<th>'+credito.costototal+'</th>'+
                 '</tr>';
               //  }
-                $("#table").append(de);
-                de=''
+              $('#table').append(deHEAD);
+              $('.valores_cae').append(deBODY);
+                deHEAD=''
+                deBODY=''
     }
             
 
