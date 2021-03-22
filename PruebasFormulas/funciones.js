@@ -10,7 +10,7 @@
         alert("Porfavor ingrese como los valores minimos que necesitamos: El valor de su credito, el plazo pactado y la taza de interes");
         
     }else{
-
+        
         var cuota = parseInt(document.getElementById('valorcuota').value);
         var seguros = parseInt(document.getElementById('seguros').value);
         var gastos = parseInt(document.getElementById('gastos').value);
@@ -77,7 +77,9 @@
             document.getElementById('resultadocostototal').innerHTML=costototal;    
     }
 
-
+    //var claseValorcuota = parseInt(document.getElementsByClassName('valorcredito').value);
+    //console.log(claseValorcuota);
+    //console.log(valorcredito)
 
 }
 

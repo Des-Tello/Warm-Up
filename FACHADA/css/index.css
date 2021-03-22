@@ -70,10 +70,50 @@ h4 {font-size: 2rem;}
     justify-content: center;
 }
 .titulo_tabla{
+    background-color: #2d3763;
+    color: white;
+    font-weight: lighter ;
 
 }
 .contenido_tabla{
+    background-color: #cccccc;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 50;
     font-stretch: condensed;
+}
+table,tr,th{
+    border: 0.1rem solid black;
+}
+input{
+   border-radius: 0.5rem;
+   border: 0rem  solid black ;
+   
+}
+.fondo_datos{
+    border-radius: 0.5rem;
+    background-color: #cccccc;
+    background-size: 50%;
+    padding: 2rem;
+}
+.titulo_datos{
+    text-align: center;
+    
+}
+.ingrese{
+    text-align: center;
+}
+.buttom_style
+{
+    text-decoration: none;
+    padding: 1rem;
+    font-weight: 400;
+    font-size: 2rem;
+    color :#2d3763; 
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 0.2rem solid black;
+}
+.buttom_style:hover{
+    color: white;
+    background-color: #2d3763;
 }

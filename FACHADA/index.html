@@ -74,24 +74,25 @@
                 </p>
             </div>
 
-            <div class="col-12 mt-4">
-                <h2>Simula tu Crédito</h2>
+            <div class="col-12 mt-4 ingrese">
+                    <div class="fondo_datos">
+                <h2 class="titulo_datos">Simula tu Crédito</h2>
                 <hr class="main_line">
                 <form id="formulario" name="" >
                         <div class="insercion">
-                    <label for="valorcredito"> Valor del Credito </label>
-                    <input type="number"  id="valorcredito">
+                    <label for="valorcredito"> Valor del Credito: </label> <br>
+                    <input  type="number"  id="valorcredito">
                     <br><br> 
 
-                    <label for="plazo">Plazo del Credito</label>
+                    <label for="plazo">Plazo del Credito:</label> <br>
                     <input type="number"  id="plazo"> 
                     <br><br>
 
-                    <label for="porcentajeInteres">Interes</label>
+                    <label for="porcentajeInteres">Interes:</label> <br>
                     <input type="number"  id="porcentajeInteres">
                     <br><br>
 
-                    <label for="valorcuota">Valor de la cuota</label>
+                    <label for="valorcuota">Valor de la cuota:</label> <br>
                     <input type="number" id="valorcuota">
                     <br><br>
                         
@@ -113,31 +114,12 @@
                         <input type="number"  id="gastos">
                     </div>
                         </div> <!--Fin del cambio de font en la insercion de datos.-->
-                    <button type="button" onclick="calculos()">Calcular</button>
-                    
-                    <table style="width:100%">
-                        <tr class="titulo_tabla">
-                            <th>Valor Cuota</th>
-                            <th>CAE</th>
-                            <th>Interes[%]</th>
-                            <th>Gastos Asociados</th>
-                            <th>Seguro Asociados</th>
-                            <th>Total de Interes</th>
-                            <th>Monto Bruto</th>
-                            <th>Costo Total</th>
-                        </tr>
-                        <tr class="contenido_tabla">
-                            <th> $<span id=resultadovalorcuota></span></th>
-                            <th><span id="resultadocae"></span></th>
-                            <th><span id="resultadointeres"></span></th>
-                            <th><span id="resultadogastos"></span></th>
-                            <th><span id="resultadoseguros"></span></th>
-                            <th>$<span id="resultadototalintereses"></span></th>
-                            <th>$<span id="resultadomontobruto"></span></th>
-                            <th>$<span id="resultadocostototal"></span></th>
-                        </tr>
+                    <button class="buttom_style"type="button" onclick="calculos()">Calcular</button>
+                        </div> <!--fondo de la solicitud de datos -->
+                        <br><br>
+                        <table style="width:100%" id="table">
 
-                      </table>
+                        </table>
                 
                 
                 </form>
