@@ -50,39 +50,47 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
         var montobruto = 0;
         
         //¿Existen Gastos?
-        if(gastos){
+        if(gastos >= 0){
             valorcredito += gastos;
             gastos = formatter.format(gastos);
             //document.getElementById('resultadogastos').innerHTML=gastos;
         }
+        else if(gastos < 0 ){
+            alert("No puede tener Gastos menores a cero.");
+        }
         else{
           //  document.getElementById('resultadogastos').innerHTML="N.R"; //No registra
-          gastos='N.R.'
+          gastos='N.R.' ; 
         }
         //¿Existen Seguros?
-        if(!seguros){
-           // document.getElementById('resultadoseguros').innerHTML="N.R"; //No registra 
-            montobruto = valorcredito;
-            seguros='N.R.'
+        
+        if(seguros < 0){
+            alert("No puede tener seguros con coste menor a cero.");
+
         }
+        else if(!seguros){
+            // document.getElementById('resultadoseguros').innerHTML="N.R"; //No registra 
+             montobruto = valorcredito;
+             seguros='N.R.' ; 
+         }
         else{
           //  document.getElementById('resultadoseguros').innerHTML=seguros;
             montobruto = valorcredito + seguros;
-            seguros = formatter.format(seguros)
+            seguros = formatter.format(seguros);
         }
         
         
-        var a = Math.pow((1+interes), plazo)*(interes)
-        var b = Math.pow((1+interes),plazo) - 1
-        var cuotareferencia = montobruto*(a/b)
+        var a = Math.pow((1+interes), plazo)*(interes);
+        var b = Math.pow((1+interes),plazo) - 1;
+        var cuotareferencia = montobruto*(a/b);
 
         //Si no tenemos cuota, la calculoamos
 
         if(!cuota){
             cuota = cuotareferencia 
         }
-        if((cuotareferencia*2)<cuota){
-            alert('Cuota No Valida')
+        else if((cuotareferencia*2)<cuota && (seguros || gastos) > 0 ){
+            alert('Cuota No Valida'); 
         }else{
             var costototal = parseInt(cuota *  plazo);
     
