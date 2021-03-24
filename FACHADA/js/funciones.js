@@ -22,8 +22,11 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
     var plazo = parseInt(document.getElementById('plazo').value);
     var interes = parseFloat(document.getElementById('porcentajeInteres').value)/100;
     var valorcuota =parseInt(document.getElementById('valorcuota').value);
+    var cuota = parseInt(document.getElementById('valorcuota').value);
+    var seguros = parseInt(document.getElementById('seguros').value);
+    var gastos = parseInt(document.getElementById('gastos').value);
 
-    if(!valorcredito || !plazo || !interes){
+    if(!valorcredito || !plazo || !interes){//datos minitmos
         alert("Porfavor ingrese como los valores minimos que necesitamos: El valor de su credito, el plazo pactado y la taza de interes");}
     else if(valorcredito < 0 ){
         alert("Recuerde que el valor del credito tiene que ser positivo.");}
@@ -41,102 +44,102 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
         {alert("El valor de cuota no puede superar el valor del credito.");}
 
     else if(valorcuota < 0 ) {alert("El valor de la cuota no puede ser menor a 0.");}
-    
+
+    else if(gastos<0){alert("Si va a ingresar gastos, que sean valores validos")}
+
+    else if(seguros<0){alert("Si va a ingresar seguros, que sean valores validos")}
+
     else{
 
-        var cuota = parseInt(document.getElementById('valorcuota').value);
-        var seguros = parseInt(document.getElementById('seguros').value);
-        var gastos = parseInt(document.getElementById('gastos').value);
         var montobruto = 0;
         
         //¿Existen Gastos?
         if(gastos >= 0){
             valorcredito += gastos;
             gastos = formatter.format(gastos);
-            //document.getElementById('resultadogastos').innerHTML=gastos;
-        }
-        else if(gastos < 0 ){
-            alert("No puede tener Gastos menores a cero.");
+            
         }
         else{
-          //  document.getElementById('resultadogastos').innerHTML="N.R"; //No registra
-          gastos='N.R.' ; 
+         
+          gastos='N.R.'; 
         }
         //¿Existen Seguros?
-        
-        if(seguros < 0){
-            alert("No puede tener seguros con coste menor a cero.");
 
-        }
-        else if(!seguros){
-            // document.getElementById('resultadoseguros').innerHTML="N.R"; //No registra 
+        if(!seguros){
+            //No registra 
+            //si no posee seguros entonces el monto bruto sera el mismo valor del credito
              montobruto = valorcredito;
              seguros='N.R.' ; 
          }
         else{
-          //  document.getElementById('resultadoseguros').innerHTML=seguros;
+            //si hay seguros se suman
             montobruto = valorcredito + seguros;
             seguros = formatter.format(seguros);
         }
         
-        
+        //calcularemos una cuota de referencia y luego veremos si usamos este o el que nos entrega el usuario, si es que lo entrega
         var a = Math.pow((1+interes), plazo)*(interes);
         var b = Math.pow((1+interes),plazo) - 1;
         var cuotareferencia = montobruto*(a/b);
 
-        //Si no tenemos cuota, la calculoamos
+        
 
         if(!cuota){
             cuota = cuotareferencia 
         }
-        else if((cuotareferencia*2)<cuota && (seguros || gastos) > 0 ){
+        //validar cuota
+        if((cuotareferencia*2)<cuota){
             alert('Cuota No Valida'); 
-        }else{
+        }
+        else{
             var costototal = parseInt(cuota *  plazo);
+            var totalinteres = costototal-montobruto;
+            
     
-        
-    
-            //Funcion CAE
+            //calculo del CAE
                  
                  var CAE = cae(valorcredito,plazo,cuota)
                  var CAE2 = CAE.toFixed(2)
-                 //console.log(CAE2);
+            
+                 //Ultimas confirmaciones
+
+                if(totalinteres<0){alert("Porfavor ingrese valores validos pues en su consulta existe un costo total a pagar menor al credito solicitado")}
+                else if(CAE2>100.00){alert("Usted Obtuvo una CAE que no es posible")}
+
+                else{
+
                  
-                 //Se Crea un objeto para ordenar
+                 //se crea un objeto para imprimir 
                  var credito = {
-                     valorcuota: cuota.toFixed(0),
-                     interes: interes,
-                     CAE: CAE2,
-                     gastos: gastos,
-                     seguros:seguros,
-                     montobruto: montobruto,
-                     totalinteres: costototal-montobruto,
-                     costototal: costototal
+                    valorcuota: cuota.toFixed(0),
+                    interes: interes*100,
+                    CAE: CAE2,
+                    gastos: gastos,
+                    seguros:seguros,
+                    montobruto: montobruto,
+                    totalinteres: totalinteres,
+                    costototal: costototal
+                 }
+                   //se siguen agregando datos la tabla que se mostrará en la ventana del usuario
+                 var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
+                 '<th>'+formatter.format(credito.valorcuota)+'</th>'+
+                 '<th>'+credito.CAE+'%</th>'+
+                 '<th>'+credito.interes.toFixed(2)+'%</th>'+
+                 '<th>'+credito.gastos+'</th>'+
+                 '<th>'+credito.seguros+'</th>'+
+                 '<th>'+formatter.format(credito.totalinteres)+'</th>'+
+                 '<th>'+formatter.format(credito.montobruto)+'</th>'+
+                 '<th>'+formatter.format(credito.costototal)+'</th>'+
+                 '</tr>';
+           
+               $('#table').append(deHEAD);
+               $('.valores_cae').append(deBODY);
+                 deHEAD=''
+                 deBODY=''
+                 
                  }
      
-                 //creditos.push(credito)
-                 //localStorage.setItem("creditos",JSON.stringify(creditos)) //sobreescribir
-                 //console.log(JSON.parse(localStorage.getItem("creditos")))
-     
-                 //Formato del peso chileno
-     
-                 //for (var i = 0; i < creditos.length; i++) {
-                 //agrego el elemento a la tabla para mostrar
-                     var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
-                     '<th>'+formatter.format(credito.valorcuota)+'</th>'+
-                     '<th>'+credito.CAE+'%</th>'+
-                     '<th>'+credito.interes*100+'%</th>'+
-                     '<th>'+credito.gastos+'</th>'+
-                     '<th>'+credito.seguros+'</th>'+
-                     '<th>'+formatter.format(credito.totalinteres)+'</th>'+
-                     '<th>'+formatter.format(credito.montobruto)+'</th>'+
-                     '<th>'+formatter.format(credito.costototal)+'</th>'+
-                     '</tr>';
-                   //  }
-                   $('#table').append(deHEAD);
-                   $('.valores_cae').append(deBODY);
-                     deHEAD=''
-                     deBODY=''
+               
      
      
                     
