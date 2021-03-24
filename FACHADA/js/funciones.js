@@ -24,26 +24,25 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
     var valorcuota =parseInt(document.getElementById('valorcuota').value);
 
     if(!valorcredito || !plazo || !interes){
-        alert("Porfavor ingrese como los valores minimos que necesitamos: El valor de su credito, el plazo pactado y la taza de interes");
-    if(valorcredito > 0 ) 
-        {alert("Recuerde que el valor del credito tiene que ser positivo.")}
+        alert("Porfavor ingrese como los valores minimos que necesitamos: El valor de su credito, el plazo pactado y la taza de interes");}
+    else if(valorcredito < 0 ){
+        alert("Recuerde que el valor del credito tiene que ser positivo.");}
 
-    if(plazo <2 || plazo >48) 
-        { alert("El plazo solo esta permitido de a 2 a 48 meses.")}
+    else if(plazo <2 || plazo >48) 
+        { alert("El plazo solo esta permitido de a 2 a 48 meses.");}
 
-    if(interes < 0) 
-        { alert("No puede tener intereses menores a 0%.")}
+    else if(interes < 0) 
+        { alert("No puede tener intereses menores a 0%.");}
     
-    if(interes > 50) 
-        { alert("No puede tener intereses superiores a 50%.")}  
+    else if(interes > 50) 
+        { alert("No puede tener intereses superiores a 50%.");}  
 
-    if(valorcuota > valorcredito) 
-        {alert("El valor de cuota no puede superar el valor del credito.")}
+    else if(valorcuota > valorcredito) 
+        {alert("El valor de cuota no puede superar el valor del credito.");}
 
-    if(valorcuota < 0 ) {alert("El valor de la cuota no puede ser menor a 0.")}
+    else if(valorcuota < 0 ) {alert("El valor de la cuota no puede ser menor a 0.");}
     
-
-    }else{
+    else{
 
         var cuota = parseInt(document.getElementById('valorcuota').value);
         var seguros = parseInt(document.getElementById('seguros').value);
