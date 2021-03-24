@@ -74,12 +74,16 @@ input{
    border: 0rem  solid black ;
    
 }
+.table_style {
+    border: none;
+}
 .fondo_datos{
     border-radius: 0.5rem;
     background-color: #cccccc;
     background-size: 50%;
     padding: 2rem;
 }
+
 .titulo_datos{
     text-align: center;
     

@@ -1,3 +1,4 @@
+const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: 'CLP', minimumFractionDigits: 0});
     
     var creditos = [];
     
@@ -52,6 +53,7 @@
         //¿Existen Gastos?
         if(gastos){
             valorcredito += gastos;
+            gastos = formatter.format(gastos);
             //document.getElementById('resultadogastos').innerHTML=gastos;
         }
         else{
@@ -67,6 +69,7 @@
         else{
           //  document.getElementById('resultadoseguros').innerHTML=seguros;
             montobruto = valorcredito + seguros;
+            seguros = formatter.format(seguros)
         }
         //Si no tenemos cuota, la calculoamos
         if(!cuota){
@@ -81,7 +84,59 @@
         
     
        //Funcion CAE
-            var IRRval = [];
+            
+            var CAE = cae(valorcredito,plazo,cuota)
+            var CAE2 = CAE.toFixed(2)
+            //console.log(CAE2);
+            
+            //Se Crea un objeto para ordenar
+            var credito = {
+                valorcuota: cuota.toFixed(0),
+                interes: interes.toFixed(2),
+                CAE: CAE2,
+                gastos: gastos,
+                seguros:seguros,
+                montobruto: montobruto,
+                totalinteres: costototal-montobruto,
+                costototal: costototal
+            }
+
+            //creditos.push(credito)
+            //localStorage.setItem("creditos",JSON.stringify(creditos)) //sobreescribir
+            //console.log(JSON.parse(localStorage.getItem("creditos")))
+
+            //Formato del peso chileno
+
+            //for (var i = 0; i < creditos.length; i++) {
+            //agrego el elemento a la tabla para mostrar
+                var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
+                '<th>'+formatter.format(credito.valorcuota)+'</th>'+
+                '<th>'+credito.CAE+'%</th>'+
+                '<th>'+credito.interes*100+'%</th>'+
+                '<th>'+credito.gastos+'</th>'+
+                '<th>'+credito.seguros+'</th>'+
+                '<th>'+formatter.format(credito.totalinteres)+'</th>'+
+                '<th>'+formatter.format(credito.montobruto)+'</th>'+
+                '<th>'+formatter.format(credito.costototal)+'</th>'+
+                '</tr>';
+              //  }
+              $('#table').append(deHEAD);
+              $('.valores_cae').append(deBODY);
+                deHEAD=''
+                deBODY=''
+
+
+               
+
+                
+    }
+            
+
+}
+//Funcion Cae
+function cae(valorcredito,plazo,cuota){
+
+    var IRRval = [];
             IRRval.push(-valorcredito);
     
             for (i = 0; i < plazo; i++) {
@@ -103,53 +158,10 @@
             }
             //var CAE = Math.pow((1+IRR),12)-1
             var CAE = IRR*12*100
-            var CAE2 = CAE.toFixed(2)
-            //console.log(CAE2);
-            
-            //Se Muestran resultados
-            /*
-            document.getElementById('resultadovalorcuota').innerHTML=cuota;
-            document.getElementById('resultadointeres').innerHTML=interes;
-            document.getElementById('resultadocae').innerHTML=CAE2;   
-            document.getElementById('resultadomontobruto').innerHTML=montobruto;
-            document.getElementById('resultadototalintereses').innerHTML=costototal-montobruto;
-            document.getElementById('resultadocostototal').innerHTML=costototal;    
-            */
-            var credito = {
-                valorcuota: cuota.toFixed(0),
-                interes: interes.toFixed(2),
-                CAE: CAE2,
-                gastos: gastos,
-                seguros:seguros,
-                montobruto: montobruto,
-                totalinteres: costototal-montobruto,
-                costototal: costototal
-            }
-            //creditos.push(credito)
-            //localStorage.setItem("creditos",JSON.stringify(creditos)) //sobreescribir
-            //console.log(JSON.parse(localStorage.getItem("creditos")))
-            
-
-            //for (var i = 0; i < creditos.length; i++) {
-                var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
-                '<th>'+credito.valorcuota+'</th>'+
-                '<th>'+credito.CAE+'</th>'+
-                '<th>'+credito.interes*100+'</th>'+
-                '<th>'+credito.gastos+'</th>'+
-                '<th>'+credito.seguros+'</th>'+
-                '<th>'+credito.totalinteres+'</th>'+
-                '<th>'+credito.montobruto+'</th>'+
-                '<th>'+credito.costototal+'</th>'+
-                '</tr>';
-              //  }
-              $('#table').append(deHEAD);
-              $('.valores_cae').append(deBODY);
-                deHEAD=''
-                deBODY=''
-    }
-            
-
+            return CAE
 }
+
+
 
 //Funcion Que Muestra Contenidos 
 function showContent() {
@@ -162,11 +174,14 @@ function showContent() {
     }
     else {
         element.style.display='none';
+        document.getElementById("seguros").value = '';
     }
     if (check2.checked) {
         element2.style.display='block';
     }
     else {
         element2.style.display='none';
+        document.getElementById("gastos").value = '';
     }
+    
 }

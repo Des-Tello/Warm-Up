@@ -15,6 +15,7 @@ btn_modo.addEventListener('click', function(evento) {
         footer.className =footer.className.replace( /(?:^|\s)oscuro_footer(?!\S)/g , '' )
         simulador.className =simulador.className.replace( /(?:^|\s)oscuro_simulador(?!\S)/g , '' )
         tabla.className =tabla.className.replace( /(?:^|\s)oscuro_tabla(?!\S)/g , '' )
+        tabla.className =tabla.className.replace( /(?:^|\s)table-dark(?!\S)/g , '' )
         icon_mode_i.className = 'fas fa-lightbulb';
     }
     else {
@@ -24,6 +25,7 @@ btn_modo.addEventListener('click', function(evento) {
         footer.className += ' oscuro_footer';
         simulador.className += ' oscuro_simulador';
         tabla.className += ' oscuro_tabla';
+        tabla.className += ' table-dark';
         icon_mode_i.className = 'far fa-lightbulb';
     }
 });
