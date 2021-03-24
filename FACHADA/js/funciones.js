@@ -70,23 +70,20 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
             montobruto = valorcredito + seguros;
             seguros = formatter.format(seguros)
         }
+        
+        
+        var a = Math.pow((1+interes), plazo)*(interes)
+        var b = Math.pow((1+interes),plazo) - 1
+        var cuotareferencia = montobruto*(a/b)
+
         //Si no tenemos cuota, la calculoamos
-        var cuotareferencia = 0;
+
         if(!cuota){
-            //calculo de la cuota
-            var x = Math.pow((1+interes), plazo)*(interes)
-            var y = Math.pow((1+interes),plazo) - 1
-            cuota = montobruto*(x/y);
-        }else if(cuota){
-            //verificacion cuota valida
-            var a = Math.pow((1+interes), plazo)*(interes)
-            var b = Math.pow((1+interes),plazo) - 1
-            cuotareferencia = montobruto*(a/b);
+            cuota = cuotareferencia 
         }
         if((cuotareferencia*2)<cuota){
             alert('Cuota No Valida')
         }else{
-            
             var costototal = parseInt(cuota *  plazo);
     
         
@@ -100,7 +97,7 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
                  //Se Crea un objeto para ordenar
                  var credito = {
                      valorcuota: cuota.toFixed(0),
-                     interes: interes.toFixed(2),
+                     interes: interes,
                      CAE: CAE2,
                      gastos: gastos,
                      seguros:seguros,
