@@ -71,62 +71,76 @@ const formatter = new Intl.NumberFormat('es-CL', {style: 'currency', currency: '
             seguros = formatter.format(seguros)
         }
         //Si no tenemos cuota, la calculoamos
+        var cuotareferencia = 0;
         if(!cuota){
             //calculo de la cuota
             var x = Math.pow((1+interes), plazo)*(interes)
             var y = Math.pow((1+interes),plazo) - 1
             cuota = montobruto*(x/y);
+        }else if(cuota){
+            //verificacion cuota valida
+            var a = Math.pow((1+interes), plazo)*(interes)
+            var b = Math.pow((1+interes),plazo) - 1
+            cuotareferencia = montobruto*(a/b);
         }
-        
-        var costototal = parseInt(cuota *  plazo);
+        if((cuotareferencia*2)<cuota){
+            alert('Cuota No Valida')
+        }else{
+            
+            var costototal = parseInt(cuota *  plazo);
     
         
     
-       //Funcion CAE
-            
-            var CAE = cae(valorcredito,plazo,cuota)
-            var CAE2 = CAE.toFixed(2)
-            //console.log(CAE2);
-            
-            //Se Crea un objeto para ordenar
-            var credito = {
-                valorcuota: cuota.toFixed(0),
-                interes: interes.toFixed(2),
-                CAE: CAE2,
-                gastos: gastos,
-                seguros:seguros,
-                montobruto: montobruto,
-                totalinteres: costototal-montobruto,
-                costototal: costototal
-            }
+            //Funcion CAE
+                 
+                 var CAE = cae(valorcredito,plazo,cuota)
+                 var CAE2 = CAE.toFixed(2)
+                 //console.log(CAE2);
+                 
+                 //Se Crea un objeto para ordenar
+                 var credito = {
+                     valorcuota: cuota.toFixed(0),
+                     interes: interes.toFixed(2),
+                     CAE: CAE2,
+                     gastos: gastos,
+                     seguros:seguros,
+                     montobruto: montobruto,
+                     totalinteres: costototal-montobruto,
+                     costototal: costototal
+                 }
+     
+                 //creditos.push(credito)
+                 //localStorage.setItem("creditos",JSON.stringify(creditos)) //sobreescribir
+                 //console.log(JSON.parse(localStorage.getItem("creditos")))
+     
+                 //Formato del peso chileno
+     
+                 //for (var i = 0; i < creditos.length; i++) {
+                 //agrego el elemento a la tabla para mostrar
+                     var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
+                     '<th>'+formatter.format(credito.valorcuota)+'</th>'+
+                     '<th>'+credito.CAE+'%</th>'+
+                     '<th>'+credito.interes*100+'%</th>'+
+                     '<th>'+credito.gastos+'</th>'+
+                     '<th>'+credito.seguros+'</th>'+
+                     '<th>'+formatter.format(credito.totalinteres)+'</th>'+
+                     '<th>'+formatter.format(credito.montobruto)+'</th>'+
+                     '<th>'+formatter.format(credito.costototal)+'</th>'+
+                     '</tr>';
+                   //  }
+                   $('#table').append(deHEAD);
+                   $('.valores_cae').append(deBODY);
+                     deHEAD=''
+                     deBODY=''
+     
+     
+                    
+     
+        }
 
-            //creditos.push(credito)
-            //localStorage.setItem("creditos",JSON.stringify(creditos)) //sobreescribir
-            //console.log(JSON.parse(localStorage.getItem("creditos")))
-
-            //Formato del peso chileno
-
-            //for (var i = 0; i < creditos.length; i++) {
-            //agrego el elemento a la tabla para mostrar
-                var deBODY = '<tr class="contenido_tabla" id="contenido_tabla">'+
-                '<th>'+formatter.format(credito.valorcuota)+'</th>'+
-                '<th>'+credito.CAE+'%</th>'+
-                '<th>'+credito.interes*100+'%</th>'+
-                '<th>'+credito.gastos+'</th>'+
-                '<th>'+credito.seguros+'</th>'+
-                '<th>'+formatter.format(credito.totalinteres)+'</th>'+
-                '<th>'+formatter.format(credito.montobruto)+'</th>'+
-                '<th>'+formatter.format(credito.costototal)+'</th>'+
-                '</tr>';
-              //  }
-              $('#table').append(deHEAD);
-              $('.valores_cae').append(deBODY);
-                deHEAD=''
-                deBODY=''
-
-
-               
-
+        
+        
+        
                 
     }
             
