@@ -31,6 +31,10 @@ if(!valorcredito || !plazo || !interes){//datos minitmos
     alert("Porfavor ingrese como los valores minimos que necesitamos: El valor de su credito, el plazo pactado y la taza de interes");}
 else if(valorcredito < 0 ){
     alert("Recuerde que el valor del credito tiene que ser positivo.");}
+else if (valorcredito > 100000000)
+{
+    alert("No puede simular un credito mayor a 100 millones.")
+}
 
 else if(plazo <2 || plazo >48) 
     { alert("El plazo solo esta permitido de a 2 a 48 meses.");}
